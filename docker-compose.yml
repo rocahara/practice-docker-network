@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    ports:
+      - 8888:8888
+    depends_on:
+      - db
+    build:
+      context: ./
+      dockerfile: ./build/web/Dockerfile
+  db:
+    image: mysql
+    volumes:
+      - ./build/db/sql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
